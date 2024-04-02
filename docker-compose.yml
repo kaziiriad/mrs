@@ -1,0 +1,30 @@
+version: "4"
+
+services:
+
+  db:
+    image: postgres:12
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: mrs_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  
+  web: 
+    container_name: django_mrs
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+     - SECRET_KEY=${SECRET_KEY}
+     - DATABASE_URL=postgres://user:${DB_PASSWORD}@db:5432/mrs_db
+     - DATABASE_HOST=db
+    depends_on: 
+      - db
+
+volumes:
+  pgdata: {}

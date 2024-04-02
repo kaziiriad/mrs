@@ -100,7 +100,7 @@ DATABASES = {
     # }
 
     'default' : dj_database_url.config(
-        env('DB_URL')
+        default=env('DB_URL')
     )
 }
 
@@ -145,3 +145,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'mrs_app.User'
+
+DATE_INPUT_FORMATS = ('%d-%m-%Y','%Y-%m-%d')
