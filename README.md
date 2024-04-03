@@ -21,11 +21,11 @@ To set up and run the project locally, follow these steps:
 
 1. Clone the project.
 ```bash
-git clone <git repo>
+git clone https://github.com/kaziiriad/mrs.git
 ``` 
 2. Navigate to the project directory:
 ```bash
-cd <repo dir>
+cd mrs/
 ```
 3. Modify the `env.example` to `.env` and add API credentials:
 
