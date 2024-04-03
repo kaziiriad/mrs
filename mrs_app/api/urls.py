@@ -14,6 +14,7 @@ urlpatterns = [
     # path('login', LoginView.as_view(), name='login'),
     # path('logout', LogoutView.as_view(), name='logout'),
     path('', include(router.urls)),
+    path('movie/', MovieDetailView.as_view(), name='movie-detail'),
     # path('token-refresh/',
     #      jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
 ]
