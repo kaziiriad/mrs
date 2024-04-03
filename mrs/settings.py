@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import datetime
 import os
 import environ
 import dj_database_url
@@ -55,6 +55,9 @@ INSTALLED_APPS = [
 EXTERNAL_APPS = [
     'rest_framework',
     'mrs_app',
+    'django_filters',
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt'
 ]
 
 INSTALLED_APPS += EXTERNAL_APPS
@@ -99,7 +102,7 @@ DATABASES = {
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
 
-    'default' : dj_database_url.config(
+    'default': dj_database_url.config(
         default=env('DB_URL')
     )
 }
@@ -148,4 +151,22 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'mrs_app.User'
 
-DATE_INPUT_FORMATS = ('%d-%m-%Y','%Y-%m-%d')
+REST_FRAMEWORK = {
+        'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
+    ],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
+}
